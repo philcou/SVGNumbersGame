@@ -1,0 +1,52 @@
+<svg xmlns:a="http://www.adobe.com/svg10-extensions" a:timeline="independent" ... >
+ 
+-----------------------
+
+<a:audio xlink:href="rev3.mp3" volume="10" begin="1.56s">
+</a:audio>
+<a:audio xlink:href="Sound002.wav" volume="10" begin="37s" repeatDur="indefinite">
+</a:audio>
+
+------------------------
+
+<a:audio xlink:href="ding.wav" begin="play.click" />
+<circle id="play" cx="25" cy="25" r="10" fill="red"/>
+
+-----------------------
+
+//3D audio
+<a:audio3d id="sound" x="1" xlink:href="ball.wav" begin="indefinite" /> <!-- sound. note x is the position -->
+
+var sound;
+sound = svgDocument.getElementById("sound"); 
+
+function playSound( pos ) 
+{   
+	// should I declare 'pos' at some point? 
+	sound.setAttribute( "x", pos ); // where x is the left right position (-1 left 0 centre and 1 for right) // the full list of attributes is x,y,z and vx,vy,vz ** 	
+	sound.beginElement();  // make it so...begin the sound now...I don't really understand any of this.
+}
+
+
+---------------------------
+
+<svg onload="init(evt)"
+         xmlns="http://www.w3.org/2000/svg"
+         xmlns:xlink="http://www.w3.org/1999/xlink"
+         xmlns:a="http://www.adobe.com/svg10-extensions"
+         a:timeline="independent">
+        <script><![CDATA[
+            var sound;
+
+            function init(e) {
+                sound = svgDocument.getElementById("sound");
+                playSound();
+            }
+
+            function playSound() {
+                sound.beginElement();
+                setTimeout("playSound()", 1000);
+            }
+        ]]></script>
+        <a:audio id="sound" xlink:href="ding.wav" begin="indefinite" />
+</svg>
